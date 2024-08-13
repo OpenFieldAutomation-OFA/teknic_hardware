@@ -1,6 +1,6 @@
 # teknic_hardware
 
-This package contains the [ros2_control](https://control.ros.org/master/index.html) hardware interface to control Teknic Clearpath SC servo motors with a `SystemInterface`. It was tested on a single CPM-SCSK-2321S-EQNA.
+This package contains a [ros2_control](https://control.ros.org/master/index.html) hardware interface to control Teknic Clearpath SC servo motors with a `SystemInterface`. It was tested on a single CPM-SCSK-2321S-EQNA.
 
 > [!NOTE]
 > This interface only works if you have bought the "Advanced" firmware option and not "Basic".
@@ -19,10 +19,12 @@ sudo reboot
 ```
 
 ## Motor Setup
-The motor should be setup with the ClearView software. The details can be found in the [User Manual](https://teknic.com/files/downloads/Clearpath-SC%20User%20Manual.pdf). Make sure that the motor is tuned and homing parameters are set up.
+The motor should be setup with the ClearView software. The details can be found in the Teknic [User Manual](https://teknic.com/files/downloads/Clearpath-SC%20User%20Manual.pdf). Make sure that the motor is tuned and homing parameters are set up.
+
+An example motor configuration file can be found in [our main repo](https://github.com/OpenFieldAutomation-OFA/ros-weed-control/tree/main/.motor_params/teknic).
 
 ## Interrupting Moves
-This package uses the sFoundation software library and a feature called "interrupting" moves (not in the official documentation) which allows executing moves immediatly instead of storing them in a queue. This feature is the reason why the “Advanced” firmware option is needed.
+The hardware interface uses the sFoundation software library and a feature called "interrupting" moves (not in the official documentation) which allows executing moves immediatly instead of storing them in a queue. This feature is the reason why the “Advanced” firmware option is needed.
 
 ## Hardware Interfaces
 The following command interfaces are published:
@@ -41,8 +43,10 @@ The hardware interfaces can also be listed by starting the controller manager an
 ros2 control list_hardware_interfaces
 ```
 
-## Parameters
-Joint:
+## `ros2_control` Parameters
+An example `ros2_control` URDF config with this hardware interface can be found in [our main repo](https://github.com/OpenFieldAutomation-OFA/ros-weed-control/blob/main/ofa_moveit_config/ros2_control/ofa_robot.ros2_control.xacro).
+
+`joint` tag:
 - `port`: The serial port of the connected SC4-Hub
 - `node`: Node number of the motor
 - `feed_constant`: Defines the conversion between one revolution of the output shaft to the distance traveled by the linear axis in m/rev. This needs to be set for `prismatic` joints and omitted for `revolute` joints.
@@ -52,4 +56,4 @@ Joint:
 - `read_only`: OPTIONAL. If set to 1, the motors are disabled after homing and the current position is logged.
 - `peak_torque`: OPTIONAL. Peak torque of the motor in Nm. This is necessary if you want the `effort` state interface to work.
 
-It is not possible to disable the trajectory planning on the motor, therefore `vel_limit` and `acc_limit` always have to be specified. When using MoveIt 2 with `joint_trajectory_controller` you should use lower joint limits than the ones set here.
+It is not possible to disable the trajectory planning on the motor, therefore `vel_limit` and `acc_limit` always have to be specified. When using MoveIt 2 with `joint_trajectory_controller` you should use lower limits than the ones set here.
