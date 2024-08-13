@@ -1,0 +1,9 @@
+<library path="teknic_hardware">
+  <class name="teknic_hardware/TeknicSystemHardware"
+         type="teknic_hardware::TeknicSystemHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      The ros2_control Teknic plugin using a system hardware interface-type.
+    </description>
+  </class>
+</library>
