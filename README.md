@@ -49,9 +49,9 @@ An example `ros2_control` URDF config with this hardware interface can be found 
 `joint` tag:
 - `port`: The serial port of the connected SC4-Hub
 - `node`: Node number of the motor
-- `feed_constant`: Defines the conversion between one revolution of the output shaft to the distance traveled by the linear axis in $\frac{m}{rev}$. This needs to be set for `prismatic` joints and omitted for `revolute` joints.
-- `vel_limit`: Velocity limit in $\frac{rad}{s}$ (without `feed_constant`) or $\frac{m}{s}$ (with `feed_constant`). Used for position moves.
-- `acc_limit`: Acceleration limit in $\frac{rad}{s^2}$ (without `feed_constant`) or $\frac{m}{s^2}$ (with `feed_constant`). Used for position and velocity moves.
+- `feed_constant`: Defines the conversion between one revolution of the output shaft to the distance traveled by the linear axis in $\text{m}/\text{rev}$. This needs to be set for `prismatic` joints and omitted for `revolute` joints.
+- `vel_limit`: Velocity limit in $\text{rad}/\text{s}$ (without `feed_constant`) or $\text{m}/\text{s}$ (with `feed_constant`). Used for position moves.
+- `acc_limit`: Acceleration limit in $\text{rad}/\text{s}^2$ (without `feed_constant`) or $\text{m}/\text{s}^2$ (with `feed_constant`). Used for position and velocity moves.
 - `homing`: If set to 2, the motor is always homed on activation. If set to 1 the motor is only homed if it has not been homed yet. If set to 0 the motor is never homed.
 - `read_only`: OPTIONAL. If set to 1, the motors are disabled after homing and the current position is logged.
 - `peak_torque`: OPTIONAL. Peak torque of the motor in Nm. This is necessary if you want the `effort` state interface to work.
