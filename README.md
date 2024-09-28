@@ -54,6 +54,6 @@ An example `ros2_control` URDF config with this hardware interface can be found 
 - `acc_limit`: Acceleration limit in $\text{rad}/\text{s}^2$ (without `feed_constant`) or $\text{m}/\text{s}^2$ (with `feed_constant`). Used for position and velocity moves.
 - `homing`: If set to 2, the motor is always homed on activation. If set to 1 the motor is only homed if it has not been homed yet. If set to 0 the motor is never homed.
 - `read_only`: OPTIONAL. If set to 1, the motors are disabled after homing and the current position is logged.
-- `peak_torque`: OPTIONAL. Peak torque of the motor in Nm. This is necessary if you want the `effort` state interface to work.
+- `peak_torque`: OPTIONAL. Peak torque of the motor in $\text{N}\ \text{m}$. This is necessary if you want the `effort` state interface to work.
 
 It is not possible to disable the trajectory planning on the motor, therefore `vel_limit` and `acc_limit` always have to be specified. When using MoveIt 2 with `joint_trajectory_controller` you should use lower joint limits for motion planning than the limits set here.
